@@ -1,0 +1,881 @@
+/* Black-based modern portfolio styling */
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Noto+Sans+JP:wght@400;700;900&display=swap");
+
+/* Base Styles */
+:root {
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-accent: #00d9ff;
+  --color-accent-alt: #ff006e;
+  --color-border: #222222;
+  --color-hover: #0f0f0f;
+  --transition-speed: 0.3s;
+  --transition-slow: 0.6s;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Noto Sans JP", "Lato", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--color-text); /* デフォルト色を変更 */
+  text-decoration: none; /* 下線を削除 */
+  transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: none; /* ホバー時も下線なし */
+}
+
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+  padding: 20px 0;
+  transition: all var(--transition-speed) ease;
+}
+
+header.scrolled {
+  background-color: rgba(10, 10, 10, 0.95);
+  padding: 10px 0;
+}
+
+header #inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  z-index: 1001; /* ハンバーガーメニューより上に表示 */
+  position: relative;
+}
+
+header h1 .logo {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-alt)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Desktop Nav */
+header nav {
+  display: flex;
+}
+
+header nav ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+header nav ul li a {
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  position: relative;
+  text-decoration: none;
+}
+
+/* 下線アニメーションを削除し、色変化のみにする */
+header nav ul li a::after {
+  content: none;
+}
+
+header nav li.active a {
+  color: var(--color-accent);
+}
+
+/* Hamburger Menu Button */
+.hamburger {
+  display: none; /* PCでは非表示 */
+  cursor: pointer;
+  width: 30px;
+  height: 24px;
+  position: relative;
+  z-index: 1001;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: var(--color-text);
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transition: 0.25s ease-in-out;
+}
+
+.hamburger span:nth-child(1) {
+  top: 0px;
+}
+.hamburger span:nth-child(2) {
+  top: 10px;
+}
+.hamburger span:nth-child(3) {
+  top: 20px;
+}
+
+.hamburger.open span:nth-child(1) {
+  top: 10px;
+  transform: rotate(135deg);
+  background: var(--color-accent);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.hamburger.open span:nth-child(3) {
+  top: 10px;
+  transform: rotate(-135deg);
+  background: var(--color-accent);
+}
+
+/* Main Content */
+main {
+  margin-top: 80px;
+}
+
+.section {
+  padding: 120px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Scroll Animation Classes */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero Section */
+#hero .section-inner {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* 中央揃えに変更 */
+  text-align: center; /* 中央揃えに変更 */
+  position: relative;
+}
+
+.hero-title {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  font-family: "Lato", sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-alt)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  margin-bottom: 40px;
+  font-family: "Lato", sans-serif;
+  letter-spacing: 0.05em;
+}
+
+/* Updated Scroll Indicator (Center + Line) */
+.hero-scroll {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-scroll span {
+  font-family: "Lato", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  writing-mode: vertical-rl; /* 縦書きにする場合 */
+  text-orientation: mixed;
+  margin-bottom: 10px;
+}
+
+/* 縦線 */
+.hero-scroll::after {
+  content: "";
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--color-accent), transparent);
+  animation: scrollLine 2s infinite;
+}
+
+@keyframes scrollLine {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  51% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 48px;
+  font-weight: 100;
+  font-family: "Lato", sans-serif;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+}
+
+/* About Section */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-text h3 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.about-text p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: var(--color-text-secondary);
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: all var(--transition-speed) ease;
+}
+
+.stat-item:hover {
+  background-color: var(--color-hover);
+  border-color: var(--color-accent);
+  transform: translateY(-5px);
+}
+
+.stat-item h3 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-alt)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.unit {
+  font-size: 24px;
+  margin-left: 2px;
+}
+
+.stat-item p {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+/* History Section */
+.history-timeline {
+  position: relative;
+  padding: 40px 0;
+}
+
+.timeline-item {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.timeline-marker {
+  position: relative;
+  width: 80px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-alt)
+  );
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+.timeline-line {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%; /* 長さを調整 */
+  background: linear-gradient(180deg, var(--color-accent), transparent);
+}
+
+.timeline-item:last-child .timeline-line {
+  display: none;
+}
+
+.timeline-content {
+  padding-left: 40px;
+  padding-top: 5px;
+}
+
+.timeline-content h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-alt)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.timeline-content p {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Works Section */
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3列に変更 */
+  gap: 30px;
+}
+
+.work-item {
+  cursor: pointer;
+  transition: all var(--transition-slow) ease;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.work-image {
+  width: 100%;
+  height: 220px; /* 少し高さを調整 */
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+}
+
+.work-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow) ease;
+}
+
+.work-item:hover .work-image img {
+  transform: scale(1.08);
+}
+
+.work-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  transition: color var(--transition-speed) ease;
+}
+
+.work-item:hover .work-info h3 {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-alt)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.work-info p {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  font-family: "Lato", sans-serif;
+}
+
+/* Services Section */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.service-card {
+  padding: 50px 40px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: all var(--transition-speed) ease;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 217, 255, 0.01)
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(0, 217, 255, 0.02)
+  );
+  border-color: var(--color-accent);
+  transform: translateY(-5px);
+}
+
+.service-icon {
+  font-size: 48px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-family: "Lato", sans-serif;
+  color: var(--color-accent);
+}
+
+.service-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.service-card p {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+/* Contact Section */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 14px;
+  transition: all var(--transition-speed) ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-alt)
+  );
+  color: var(--color-bg);
+  border: none;
+  border-radius: 4px;
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0, 217, 255, 0.4);
+}
+
+/* Footer */
+footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-nav ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.footer-nav ul li a {
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+#copyright {
+  text-align: right;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* Responsive (Mobile) */
+@media (max-width: 768px) {
+  header #inner {
+    padding: 0 20px;
+  }
+
+  .hamburger {
+    display: block; /* スマホで表示 */
+  }
+
+  /* スマホ用メニュー */
+  header nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  header nav.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+
+  header nav ul li a {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+
+  .section-inner {
+    padding: 0 20px;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .works-grid {
+    grid-template-columns: 1fr 1fr; /* タブレットなどは2列 */
+    gap: 20px;
+  }
+
+  @media (max-width: 500px) {
+    .works-grid {
+      grid-template-columns: 1fr; /* 完全なスマホは1列 */
+    }
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .footer-nav ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #copyright {
+    text-align: center;
+  }
+
+  .hero-scroll {
+    bottom: 20px;
+  }
+}
+
+/* =========================================
+   Loading Screen
+   ========================================= */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg); /* 背景色（黒） */
+  z-index: 9999; /* 最前面に配置 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#loading-screen.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-content {
+  text-align: center;
+  width: 300px; /* バーの幅 */
+}
+
+#loading-text {
+  font-family: "Lato", sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums; /* 数字の幅を固定してガタつき防止 */
+}
+
+/* プログレスバーの背景 */
+.progress-bar-bg {
+  width: 100%;
+  height: 4px;
+  background-color: #222; /* 暗いグレー */
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* プログレスバーの中身 */
+#progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-alt)
+  ); /* 青からピンクのグラデ */
+  border-radius: 2px;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.5); /* 光彩効果 */
+}
+
+/* ポップアップCSS */
+/* 画像リストのスタイル（お好みで調整してください） */
+.works-gallery img {
+  width: 30%; /* サムネイルのサイズ */
+  cursor: pointer; /* マウスを乗せた時に指マークにする */
+  transition: 0.3s;
+  margin: 5px;
+}
+.works-gallery img:hover {
+  opacity: 0.7; /* ホバー時に少し薄くする */
+}
+
+/* ポップアップ（モーダル）の背景 */
+.popup-modal {
+  display: none; /* 最初は隠しておく */
+  position: fixed;
+  z-index: 1000; /* 最前面に表示 */
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8); /* 背景を黒く透けさせる */
+}
+
+/* ポップアップの中身（拡大画像） */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px; /* 画像の最大幅 */
+  animation-name: zoom; /* ふわっと表示するアニメーション */
+  animation-duration: 0.6s;
+}
+
+/* 閉じるボタン (×) */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* アニメーション定義 */
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
