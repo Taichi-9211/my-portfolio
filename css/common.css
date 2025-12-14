@@ -173,7 +173,6 @@ main {
 
 .section {
   padding: 120px 0;
-  border-bottom: 1px solid var(--color-border);
 }
 
 .section-inner {
@@ -309,7 +308,7 @@ main {
 .about-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 40px;
   align-items: start;
 }
 
